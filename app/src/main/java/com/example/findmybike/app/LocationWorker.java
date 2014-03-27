@@ -7,23 +7,23 @@ package com.example.findmybike.app;
  * Created by Sven on 3/27/2014.
  */
 public class LocationWorker {
-    @Override
-    protected void onPreExecute() {}
 
-    @Override
-    protected void onPostExecute(Boolean result) {
+protected void onPreExecute() {}
+
+
+protected void onPostExecute(Boolean result) {
                 /* Here you can call myLocationHelper.getLat() and
                 myLocationHelper.getLong() to get the location data.*/
-    }
+        }
 
-    @Override
-    protected Boolean doInBackground(Boolean... params) {
+
+protected Boolean doInBackground(Boolean... params) {
 
         //while the location helper has not got a lock
-        while(myLocationHelper.gotLocation() == false){
-            //do nothing, just wait
-        }
+        //while(myLocationHelper.gotLocation() == false){
+        //do nothing, just wait
+       //}
         //once done return true
         return true;
-    }
-}
+        }
+        }
