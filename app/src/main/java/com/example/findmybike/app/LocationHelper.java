@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 /**
  * * Location Helper Class.
@@ -14,13 +15,15 @@ import android.os.Bundle;
  */
 public class LocationHelper {
 
+    //Mainactivity
+    private MainActivity main;
+
+    private static final String TAG = "LocationHelper";
 
     //variables to store lat and long
     private float latitude  = 0.0f;
     private float longitude = 0.0f;
 
-    //flag for when we have co-ords
-    private boolean gotLocation = false;
 
     //my location manager and listener
     private LocationManager    locationManager;
@@ -31,7 +34,10 @@ public class LocationHelper {
      *
      * @param context - The context of the calling activity.
      */
-    public LocationHelper(Context context){
+    public LocationHelper(Context context, MainActivity main){
+
+        Log.v(TAG, "SETTING UP LISTENER");
+
 
         //setup the location manager
         locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
@@ -42,6 +48,8 @@ public class LocationHelper {
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         //setup a callback for when the GPS gets a lock and we receive data
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+        this.main = main;
     }
 
     /***
@@ -55,6 +63,8 @@ public class LocationHelper {
         //called when the location service reports a change in location
         public void onLocationChanged(Location location) {
 
+            Log.v(TAG, "LOCATION CHANGE");
+
             //store lat and long
             latitude = (float) location.getLatitude();
             longitude = (float) location.getLongitude();
@@ -63,8 +73,9 @@ public class LocationHelper {
             //comment out this line if you want the service to continue updating the users location
             locationManager.removeUpdates(locationListener);
 
-            //change the flag to indicate we now have a location
-            gotLocation = true;
+
+            main.gpsResponse(latitude,longitude);
+
         }
 
         //called when the provider is disabled
@@ -100,11 +111,5 @@ public class LocationHelper {
         return longitude;
     }
 
-    /***
-     * Check if a location has been found yet.
-     * @return - True if a location has been acquired. False otherwise.
-     */
-    public Boolean gotLocation(){
-        return gotLocation;
-    }
+
 }
