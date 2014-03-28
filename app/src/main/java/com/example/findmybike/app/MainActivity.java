@@ -1,5 +1,6 @@
 package com.example.findmybike.app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,11 +9,12 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
+    Thread timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.splash_screen);
 
         LocationHelper myLocationHelper = new LocationHelper(this);
         LocationWorker locationTask = new LocationWorker(){
@@ -21,16 +23,28 @@ public class MainActivity extends ActionBarActivity {
             }
         };
         locationTask .execute(new Boolean[] {true});
+
+        timer = new Thread(){
+            public void run() {
+                try {
+                    sleep(2000);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                finally{
+                    
+                      Intent nn = new Intent (MainActivity.this,SplashScreen.class);
+                      startActivity(nn);
+
+                }
+            }
+        };
+        timer.start();
+>>>>>>> 116d55cdc6876743e513e659c6b620b61af7764f
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
