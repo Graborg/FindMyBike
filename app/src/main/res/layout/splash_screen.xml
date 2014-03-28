@@ -16,12 +16,12 @@
             android:layout_width="148dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/app_name"
+            android:text="BikeFinder"
             android:id="@+id/BikeFinder"
             android:layout_gravity="center"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false" />
+            android:typeface="serif" />
+
     </RelativeLayout>
 </RelativeLayout>
