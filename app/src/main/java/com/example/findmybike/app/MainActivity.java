@@ -1,15 +1,11 @@
 package com.example.findmybike.app;
 
-import android.content.Intent;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -17,50 +13,25 @@ public class MainActivity extends ActionBarActivity {
 
     Thread timer;
 
+    TextView lat;
+    TextView lon;
+
     private static final String TAG = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.activity_main);
 
-        LocationHelper myLocationHelper = new LocationHelper(this, this);
 
-        timer = new Thread(){
-            public void run() {
-                try {
-                    sleep(2000);
-                } catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-                finally{
-                    
-                      Intent nn = new Intent (MainActivity.this,SplashScreen.class);
-                      startActivity(nn);
-
-                }
-            }
-        };
-        timer.start();
-
+        lat = (TextView)findViewById(R.id.latitude);
+        lon = (TextView)findViewById(R.id.longitude);
         Log.v(TAG, "Appen har startats");
     }
 
 
     public void button1(View v){
-
-
-
-        TextView lat = (TextView)findViewById(R.id.latitude);
-        TextView lon = (TextView)findViewById(R.id.longitude);
-
-
-        //lat.setText(Integer.toString());
-        //lon.setText(Integer.toString());
+        LocationHelper myLocationHelper = new LocationHelper(this, this);
 
 
     }
@@ -83,7 +54,8 @@ public class MainActivity extends ActionBarActivity {
         Log.v(TAG, "GPS RESPONSE");
         Log.v(TAG, Float.toString(latitude));
         Log.v(TAG, Float.toString(longitude));
-
+        lat.setText(Float.toString(latitude));
+        lon.setText(Float.toString(longitude));
 
     }
 
