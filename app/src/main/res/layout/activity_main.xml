@@ -19,5 +19,23 @@
         android:layout_height="60dp"
         android:background="@drawable/buttonshape"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="button1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latitude"
+        android:id="@+id/latitude"
+        android:layout_below="@+id/b1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longitude"
+        android:id="@+id/longitude"
+        android:layout_below="@+id/latitude"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

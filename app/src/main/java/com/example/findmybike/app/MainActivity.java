@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -46,6 +48,21 @@ public class MainActivity extends ActionBarActivity {
         timer.start();
 
         Log.v(TAG, "Appen har startats");
+    }
+
+
+    public void button1(View v){
+
+
+
+        TextView lat = (TextView)findViewById(R.id.latitude);
+        TextView lon = (TextView)findViewById(R.id.longitude);
+
+
+        //lat.setText(Integer.toString());
+        //lon.setText(Integer.toString());
+
+
     }
 
 
