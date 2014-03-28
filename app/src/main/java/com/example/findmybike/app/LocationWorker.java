@@ -6,24 +6,28 @@ package com.example.findmybike.app;
  *
  * Created by Sven on 3/27/2014.
  */
-public class LocationWorker {
+public abstract class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> implements CallbackReciever{
 
-protected void onPreExecute() {}
+    protected void onPreExecute() {}
 
 
-protected void onPostExecute(Boolean result) {
+    protected void onPostExecute(Boolean result) {
                 /* Here you can call myLocationHelper.getLat() and
                 myLocationHelper.getLong() to get the location data.*/
         }
 
 
-protected Boolean doInBackground(Boolean... params) {
+    protected Boolean doInBackground(Boolean... params) {
 
         //while the location helper has not got a lock
-        //while(myLocationHelper.gotLocation() == false){
+        while(myLocationHelper.gotLocation() == false){
         //do nothing, just wait
-       //}
+       }
         //once done return true
         return true;
         }
-        }
+
+    public void callback(){
+
+    }
+}

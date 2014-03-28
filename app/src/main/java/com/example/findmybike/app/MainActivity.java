@@ -12,6 +12,15 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        LocationHelper myLocationHelper = new LocationHelper(this);
+        LocationWorker locationTask = new LocationWorker(){
+            public void callback(Object object){
+
+            }
+        };
+        locationTask .execute(new Boolean[] {true});
     }
 
 
