@@ -3,26 +3,24 @@ package com.example.findmybike.app;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
 
     Thread timer;
 
+    private static final String TAG = "Main";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        LocationHelper myLocationHelper = new LocationHelper(this);
-        LocationWorker locationTask = new LocationWorker(){
-            public void callback(Object object){
-
-            }
-        };
-        locationTask .execute(new Boolean[] {true});
+        LocationHelper myLocationHelper = new LocationHelper(this, this);
 
         timer = new Thread(){
             public void run() {
@@ -41,7 +39,8 @@ public class MainActivity extends ActionBarActivity {
             }
         };
         timer.start();
->>>>>>> 116d55cdc6876743e513e659c6b620b61af7764f
+
+        Log.v(TAG, "Appen har startats");
     }
 
 
@@ -56,6 +55,14 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void gpsResponse(float latitude,float longitude){
+        Log.v(TAG, "GPS RESPONSE");
+        Log.v(TAG, Float.toString(latitude));
+        Log.v(TAG, Float.toString(longitude));
+
+
     }
 
 }
