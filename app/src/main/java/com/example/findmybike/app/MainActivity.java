@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
-    Thread timer;
-
     TextView lat;
     TextView lon;
 
@@ -31,7 +29,9 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void button1(View v){
-        LocationHelper myLocationHelper = new LocationHelper(this, this);
+       //
+       //
+       LocationHelper myLocationHelper = new LocationHelper(this, this);
 
 
     }
