@@ -29,8 +29,8 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void button1(View v){
-       //
-       //
+
+
        LocationHelper myLocationHelper = new LocationHelper(this, this);
 
 
