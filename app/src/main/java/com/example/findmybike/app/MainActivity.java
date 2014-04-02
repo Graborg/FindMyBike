@@ -80,7 +80,8 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
     }
 
-    public void button1(View v){
+    public void savePosition(View v){
+
        LocationHelper myLocationHelper = new LocationHelper(this, this);
     }
 
@@ -90,6 +91,14 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         //
         // Hitta positionen för cykeln, det vill säga positionen som sparas vid knapptryck
         // på ParkeMyBike!
+    }
+
+    public void openMaps(View v){
+
+
+        //Open Google maps
+
+
     }
 
 

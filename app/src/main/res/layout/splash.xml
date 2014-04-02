@@ -5,9 +5,9 @@
     android:background="@android:color/darker_gray">
 
     <ImageView
-        android:layout_width="192dp"
-        android:layout_height="255dp"
+        android:layout_width="189dp"
+        android:layout_height="251dp"
         android:id="@+id/imageView"
         android:layout_gravity="center"
-        android:background="@drawable/logo_type"/>
+        android:background="@drawable/logo"/>
 </FrameLayout>
