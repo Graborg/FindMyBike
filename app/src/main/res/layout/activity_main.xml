@@ -21,7 +21,7 @@
         android:background="@drawable/positionbutton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="button1" />
+        android:onClick="savePosition" />
 
     <TextView
         android:layout_width="wrap_content"

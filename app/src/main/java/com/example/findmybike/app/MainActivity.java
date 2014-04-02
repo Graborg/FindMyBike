@@ -28,10 +28,18 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void button1(View v){
+    public void savePosition(View v){
 
 
        LocationHelper myLocationHelper = new LocationHelper(this, this);
+
+
+    }
+
+    public void openMaps(View v){
+
+
+        //Open Google maps
 
 
     }
