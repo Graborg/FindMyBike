@@ -36,6 +36,16 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    public void button2(View v){
+
+        //
+        // Hitta positionen för cykeln, det vill säga positionen som sparas vid knapptryck
+        // på ParkeMyBike!
+        //
+        //
+        //
+    }
+
 
 
     @Override
