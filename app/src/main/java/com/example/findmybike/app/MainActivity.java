@@ -34,7 +34,14 @@ public class MainActivity extends ActionBarActivity {
 
     public void button2(View v){
         LocationTracker myLocationTracker = new LocationTracker(this, this);
+
+        //
+        // Hitta positionen för cykeln, det vill säga positionen som sparas vid knapptryck
+        // på ParkeMyBike!
     }
+
+
+>>>>>>> 1b39b1893e2beb089b63797c96d2908066af5998
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

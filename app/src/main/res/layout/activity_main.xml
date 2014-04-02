@@ -13,7 +13,7 @@
         android:id="@+id/b1"
 
         android:textColor="#FFFFFF"
-        android:text="Position"
+        android:text="Parke Bicycle"
         android:textSize="30sp"
 
         android:layout_width="270dp"
@@ -67,7 +67,7 @@
         android:id="@+id/b2"
 
         android:textColor="#FFFFFF"
-        android:text="FindMyBike!"
+        android:text="Find Bicycle"
         android:textSize="30sp"
 
         android:layout_width="270dp"
