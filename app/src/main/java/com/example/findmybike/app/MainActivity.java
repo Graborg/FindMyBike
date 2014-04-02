@@ -44,8 +44,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
->>>>>>> 1b39b1893e2beb089b63797c96d2908066af5998
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
