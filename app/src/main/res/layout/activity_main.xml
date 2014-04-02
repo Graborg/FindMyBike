@@ -78,7 +78,7 @@
         android:layout_alignLeft="@+id/b1"
         android:layout_alignStart="@+id/b1"
         android:layout_marginBottom="91dp"
-        android:onClick="button2" />
+        android:onClick="openMap" />
 
     <TextView
         android:layout_width="wrap_content"

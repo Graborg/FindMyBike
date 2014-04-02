@@ -17,6 +17,14 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import android.content.BroadcastReceiver;
 
 
@@ -32,10 +40,10 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
     private ActivityRecognitionClient actClient;
     private BroadcastReceiver receiver;
-
+    private GoogleMap map;
 
     private static final String TAG = "Main";
-
+    private static LatLng BikePosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,18 +101,19 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
        LocationHelper myLocationHelper = new LocationHelper(this, this);
     }
 
-    public void button2(View v){
-        LocationTracker myLocationTracker = new LocationTracker(this, this);
 
-        //
-        // Hitta positionen för cykeln, det vill säga positionen som sparas vid knapptryck
-        // på ParkeMyBike!
-    }
-
-    public void openMaps(View v){
-
-
-        //Open Google maps
+    public void openMap(View v){
+        setContentView(R.layout.map_view);
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+                .getMap();
+        Marker bikePosition = map.addMarker(new MarkerOptions()
+                .position(BikePosition)
+                .title("Your bike")
+                .snippet("Nice bike")
+                .icon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.logo)));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(BikePosition, 15));
+        map.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
 
 
     }
@@ -131,7 +140,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         Log.v(TAG, Float.toString(longitude));
         lat.setText(Float.toString(latitude));
         lon.setText(Float.toString(longitude));
-
+        BikePosition = new LatLng(latitude,longitude);
     }
 
     protected void actResponse(String act){
