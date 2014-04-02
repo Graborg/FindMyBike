@@ -14,6 +14,9 @@ public class MainActivity extends ActionBarActivity {
     TextView lat;
     TextView lon;
 
+    Float latitude;
+    Float longitude;
+
     private static final String TAG = "Main";
 
     @Override
@@ -30,10 +33,15 @@ public class MainActivity extends ActionBarActivity {
 
     public void savePosition(View v){
 
-
        LocationHelper myLocationHelper = new LocationHelper(this, this);
+    }
 
+    public void button2(View v){
+        LocationTracker myLocationTracker = new LocationTracker(this, this);
 
+        //
+        // Hitta positionen för cykeln, det vill säga positionen som sparas vid knapptryck
+        // på ParkeMyBike!
     }
 
     public void openMaps(View v){
@@ -43,7 +51,6 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-
 
 
     @Override
@@ -59,6 +66,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     protected void gpsResponse(float latitude,float longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
+
         Log.v(TAG, "GPS RESPONSE");
         Log.v(TAG, Float.toString(latitude));
         Log.v(TAG, Float.toString(longitude));
