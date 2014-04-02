@@ -21,7 +21,7 @@ public class SplashScreen extends Activity {
 
             public void run(){
                 try {
-                    sleep(5000);
+                    sleep(3000);
                     Intent sintent = new Intent("android.intent.action.MENU");
                     startActivity(sintent);
 
