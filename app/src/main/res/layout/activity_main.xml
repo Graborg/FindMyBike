@@ -18,7 +18,7 @@
 
         android:layout_width="270dp"
         android:layout_height="70dp"
-        android:onClick="button1"
+        android:onClick="savePosition"
         android:layout_marginBottom="91dp"
         style="@style/btnStyleOrange"
         android:layout_above="@+id/latitude"
