@@ -14,6 +14,9 @@ public class MainActivity extends ActionBarActivity {
     TextView lat;
     TextView lon;
 
+    Float latitude;
+    Float longitude;
+
     private static final String TAG = "Main";
 
     @Override
@@ -51,6 +54,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     protected void gpsResponse(float latitude,float longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
+
         Log.v(TAG, "GPS RESPONSE");
         Log.v(TAG, Float.toString(latitude));
         Log.v(TAG, Float.toString(longitude));
