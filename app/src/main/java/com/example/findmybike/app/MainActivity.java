@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.content.IntentFilter;
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -49,9 +51,15 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                String v =  "Activity :" + intent.getStringExtra("Activity") +"n";
+                String v =  intent.getStringExtra("Activity");
+                activity.setText(v);
             }
         };
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
+        registerReceiver(receiver, filter);
+
 
 
 
@@ -66,7 +74,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         Intent intent = new Intent(this, MyIntentService.class);
         PendingIntent callbackIntent = PendingIntent.getService(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        actClient.requestActivityUpdates(3000, callbackIntent);
+        actClient.requestActivityUpdates(10000, callbackIntent);
         Log.v(TAG, "Connected");
     }
 

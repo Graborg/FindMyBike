@@ -16,34 +16,37 @@ public class MyIntentService extends IntentService {
 
     public MyIntentService() {
         super("MyIntentService");
-        Log.v(TAG, "Service started.");
-
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.v(TAG, "Intent handle");
-
-        if (ActivityRecognitionResult.hasResult(intent)) {
+            if (ActivityRecognitionResult.hasResult(intent)) {
             ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
-
+            String type = getType(result);
             Intent i = new Intent("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
-            i.putExtra("Activity", getType(result) );
-
+            i.putExtra("Activity", type);
+            sendBroadcast(i);
 
 
         }
     }
     private String getType(ActivityRecognitionResult result){
         DetectedActivity act = result.getMostProbableActivity();
+        String ret = "";
         switch (act.getType()){
-            case DetectedActivity.IN_VEHICLE: Log.v(TAG, "BIL");                    ;
-            case DetectedActivity.ON_BICYCLE: Log.v(TAG, "CYKEL");
-            case DetectedActivity.ON_FOOT: Log.v(TAG, "TILL FOTS");
-            case DetectedActivity.STILL: Log.v(TAG, "STILLA");
-            case DetectedActivity.TILTING: Log.v(TAG, "LUTNING");
-            case DetectedActivity.UNKNOWN: Log.v(TAG, "OKÄND");
+            case DetectedActivity.IN_VEHICLE: ret = "Bil";
+                break;
+            case DetectedActivity.ON_BICYCLE: ret = "Cykel";
+                break;
+            case DetectedActivity.ON_FOOT: ret = "Till fots";
+                break;
+            case DetectedActivity.STILL: ret = "Stilla";
+                break;
+            case DetectedActivity.TILTING: ret = "Lutar";
+                break;
+            case DetectedActivity.UNKNOWN: ret = "Okänd";
+                break;
         }
-        return "";
+        return ret;
     }
 }
