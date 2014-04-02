@@ -29,14 +29,12 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void button1(View v){
-
-
        LocationHelper myLocationHelper = new LocationHelper(this, this);
-
-
     }
 
-
+    public void button2(View v){
+        LocationTracker myLocationTracker = new LocationTracker(this, this);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
