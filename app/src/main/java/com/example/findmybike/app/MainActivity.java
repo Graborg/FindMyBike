@@ -1,6 +1,9 @@
 package com.example.findmybike.app;
 
 
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,14 +11,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.ActivityRecognitionClient;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import android.content.BroadcastReceiver;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 
     TextView lat;
     TextView lon;
 
+    TextView activity;
+
     Float latitude;
     Float longitude;
+
+    private ActivityRecognitionClient actClient;
+    private BroadcastReceiver receiver;
+
 
     private static final String TAG = "Main";
 
@@ -25,11 +40,45 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
 
+        int resp =GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if(resp == ConnectionResult.SUCCESS){
+            actClient = new ActivityRecognitionClient(this, this, this);
+            actClient.connect();
+            Log.v(TAG,"actClient started");
+        }
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String v =  "Activity :" + intent.getStringExtra("Activity") +"n";
+            }
+        };
+
+
+
+        activity = (TextView)findViewById(R.id.activity);
         lat = (TextView)findViewById(R.id.latitude);
         lon = (TextView)findViewById(R.id.longitude);
         Log.v(TAG, "Appen har startats");
     }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+        Intent intent = new Intent(this, MyIntentService.class);
+        PendingIntent callbackIntent = PendingIntent.getService(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        actClient.requestActivityUpdates(3000, callbackIntent);
+        Log.v(TAG, "Connected");
+    }
+
+    @Override
+    public void onDisconnected() {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
 
     public void button1(View v){
        LocationHelper myLocationHelper = new LocationHelper(this, this);
@@ -66,6 +115,10 @@ public class MainActivity extends ActionBarActivity {
         lat.setText(Float.toString(latitude));
         lon.setText(Float.toString(longitude));
 
+    }
+
+    protected void actResponse(String act){
+        activity.setText(act);
     }
 
 }

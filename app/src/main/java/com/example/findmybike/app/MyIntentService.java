@@ -4,6 +4,7 @@ import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
 
 /**
@@ -11,24 +12,38 @@ import android.content.Intent;
  */
 public class MyIntentService extends IntentService {
 
+    private static final String TAG = "MyIntentService";
+
     public MyIntentService() {
         super("MyIntentService");
+        Log.v(TAG, "Service started.");
+
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.v(TAG, "Intent handle");
+
         if (ActivityRecognitionResult.hasResult(intent)) {
             ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
-            // Put your application specific logic here (i.e. result.getMostProbableActivity())
-            DetectedActivity act = result.getMostProbableActivity();
-            switch (act.getType()){
-                case DetectedActivity.IN_VEHICLE:;
-                case DetectedActivity.ON_BICYCLE:;
-                case DetectedActivity.ON_FOOT:;
-                case DetectedActivity.STILL:;
-                case DetectedActivity.TILTING:;
-                case DetectedActivity.UNKNOWN:;
-            }
+
+            Intent i = new Intent("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
+            i.putExtra("Activity", getType(result) );
+
+
+
         }
+    }
+    private String getType(ActivityRecognitionResult result){
+        DetectedActivity act = result.getMostProbableActivity();
+        switch (act.getType()){
+            case DetectedActivity.IN_VEHICLE: Log.v(TAG, "BIL");                    ;
+            case DetectedActivity.ON_BICYCLE: Log.v(TAG, "CYKEL");
+            case DetectedActivity.ON_FOOT: Log.v(TAG, "TILL FOTS");
+            case DetectedActivity.STILL: Log.v(TAG, "STILLA");
+            case DetectedActivity.TILTING: Log.v(TAG, "LUTNING");
+            case DetectedActivity.UNKNOWN: Log.v(TAG, "OKÄND");
+        }
+        return "";
     }
 }
