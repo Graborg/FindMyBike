@@ -111,7 +111,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
                 .title("Your bike")
                 .snippet("Nice bike")
                 .icon(BitmapDescriptorFactory
-                        .fromResource(R.drawable.logo)));
+                        .fromResource(R.drawable.maplogo)));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(BikePosition, 15));
         map.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
 
