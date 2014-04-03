@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.content.IntentFilter;
 
@@ -31,8 +32,13 @@ import android.content.BroadcastReceiver;
 
 public class MainActivity extends ActionBarActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 
+    Boolean click = false;
+
     TextView lat;
     TextView lon;
+
+    Button b1;
+    Button b2;
 
     TextView activity;
 
@@ -45,14 +51,29 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
     private static final String TAG = "Main";
     private static LatLng BikePosition;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences prefs = this.getSharedPreferences("BikePosition",0);
         this.latitude = prefs.getFloat("latitude",0);
         this.longitude = prefs.getFloat("latitude",0);
         BikePosition = new LatLng(latitude,longitude);
+
+        b1 = (Button)findViewById(R.id.b1);
+        b2 = (Button)findViewById(R.id.b2);
+
+        if(!click){
+            b2.setBackgroundResource(R.drawable.buttonnotclickableleft);
+            b2.setEnabled(false);
+        }else{
+            b2.setBackgroundResource(R.drawable.buttonleft);
+            b2.setEnabled(true);
+        }
+
 
 
         int resp =GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -81,6 +102,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         lon = (TextView)findViewById(R.id.longitude);
         lat.setText(Float.toString(latitude));
         lon.setText(Float.toString(longitude));
+
         Log.v(TAG, "Appen har startats");
     }
 
@@ -106,10 +128,15 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
     public void savePosition(View v){
 
        LocationHelper myLocationHelper = new LocationHelper(this, this);
+
+       b2.setBackgroundResource(R.drawable.buttonleft);
+       b2.setEnabled(true);
     }
 
 
+
     public void openMap(View v){
+
         setContentView(R.layout.map_view);
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
                 .getMap();
@@ -118,9 +145,11 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
                 .title("Your bike")
                 .snippet("Nice bike")
                 .icon(BitmapDescriptorFactory
-                        .fromResource(R.drawable.logo)));
+                        .fromResource(R.drawable.maplogo)));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(BikePosition, 15));
         map.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
+
+//
 
 
     }

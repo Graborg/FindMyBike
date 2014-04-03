@@ -21,18 +21,21 @@ public class MyIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
             if (ActivityRecognitionResult.hasResult(intent)) {
-            ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
-            String type = getType(result);
-            Intent i = new Intent("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
-            i.putExtra("Activity", type);
-            sendBroadcast(i);
+
+                ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
+                String type = getType(result);
+                Intent i = new Intent("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
+                i.putExtra("Activity", type);
+                sendBroadcast(i);
 
 
         }
     }
     private String getType(ActivityRecognitionResult result){
+
         DetectedActivity act = result.getMostProbableActivity();
         String ret = "";
+
         switch (act.getType()){
             case DetectedActivity.IN_VEHICLE: ret = "Bil";
                 break;
