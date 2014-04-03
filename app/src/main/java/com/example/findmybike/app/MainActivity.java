@@ -122,8 +122,6 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
        LocationHelper myLocationHelper = new LocationHelper(this, this);
 
-       b2.setBackgroundResource(R.drawable.buttonleft);
-       b2.setEnabled(true);
     }
 
 
@@ -170,6 +168,10 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         lat.setText(Float.toString(latitude));
         lon.setText(Float.toString(longitude));
         BikePosition = new LatLng(latitude,longitude);
+
+
+        b2.setBackgroundResource(R.drawable.buttonleft);
+        b2.setEnabled(true);
     }
 
     protected void actResponse(String act){
