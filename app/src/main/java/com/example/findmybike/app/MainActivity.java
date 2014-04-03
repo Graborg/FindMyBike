@@ -66,7 +66,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         b1 = (Button)findViewById(R.id.b1);
         b2 = (Button)findViewById(R.id.b2);
 
-        if(!click){
+        if(latitude ==0 && longitude==0){
             b2.setBackgroundResource(R.drawable.buttonnotclickableleft);
             b2.setEnabled(false);
         }else{
@@ -128,6 +128,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
     public void savePosition(View v){
 
        LocationHelper myLocationHelper = new LocationHelper(this, this);
+
 
        b2.setBackgroundResource(R.drawable.buttonleft);
        b2.setEnabled(true);
