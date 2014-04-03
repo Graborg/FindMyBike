@@ -122,6 +122,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
        LocationHelper myLocationHelper = new LocationHelper(this, this);
 
+       
        b2.setBackgroundResource(R.drawable.buttonleft);
        b2.setEnabled(true);
     }
