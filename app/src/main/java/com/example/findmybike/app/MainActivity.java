@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         setContentView(R.layout.activity_main);
         SharedPreferences prefs = this.getSharedPreferences("BikePosition",0);
         this.latitude = prefs.getFloat("latitude",0);
-        this.longitude = prefs.getFloat("latitude",0);
+        this.longitude = prefs.getFloat("longitude",0);
         BikePosition = new LatLng(latitude,longitude);
 
         b1 = (Button)findViewById(R.id.b1);
