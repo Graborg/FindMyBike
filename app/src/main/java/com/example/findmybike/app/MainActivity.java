@@ -4,6 +4,7 @@ package com.example.findmybike.app;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,6 +58,10 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences prefs = this.getSharedPreferences("BikePosition",0);
+        this.latitude = prefs.getFloat("latitude",0);
+        this.longitude = prefs.getFloat("latitude",0);
+        BikePosition = new LatLng(latitude,longitude);
 
         b1 = (Button)findViewById(R.id.b1);
         b2 = (Button)findViewById(R.id.b2);
@@ -95,6 +100,8 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         activity = (TextView)findViewById(R.id.activity);
         lat = (TextView)findViewById(R.id.latitude);
         lon = (TextView)findViewById(R.id.longitude);
+        lat.setText(Float.toString(latitude));
+        lon.setText(Float.toString(longitude));
 
         Log.v(TAG, "Appen har startats");
     }
@@ -171,6 +178,11 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         lat.setText(Float.toString(latitude));
         lon.setText(Float.toString(longitude));
         BikePosition = new LatLng(latitude,longitude);
+        SharedPreferences prefs = this.getSharedPreferences("BikePosition",0);
+        SharedPreferences.Editor editor= prefs.edit();
+        editor.putFloat("latitude",latitude);
+        editor.putFloat("longitude",longitude);
+        editor.commit();
     }
 
     protected void actResponse(String act){
