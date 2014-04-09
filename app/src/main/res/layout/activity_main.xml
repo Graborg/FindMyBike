@@ -13,7 +13,7 @@
         android:id="@+id/b1"
 
         android:textColor="#FFFFFF"
-        android:text="Parke Bicycle"
+        android:text="Park Bicycle"
         android:textSize="30sp"
 
         android:layout_width="270dp"
