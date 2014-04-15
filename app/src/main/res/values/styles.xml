@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
+
     <style name="btnStyleOrange" parent="@android:style/Widget.Button">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
@@ -16,6 +18,7 @@
         <item name="android:background">@drawable/button</item>
         <item name="android:padding">10dip</item>
     </style>
+
     <style name="btn2StyleOrange" parent="@android:style/Widget.Button">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
@@ -28,5 +31,29 @@
         <item name="android:background">@drawable/buttonleft</item>
         <item name="android:padding">10dip</item>
     </style>
+
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">@style/ButtonBar</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+
+    <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <style name="ButtonBarButton" />
 
 </resources>

@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
     private ActivityRecognitionClient actClient;
     private BroadcastReceiver receiver;
-    private GoogleMap map;
+
 
     private static final String TAG = "Main";
     private static LatLng BikePosition;
@@ -134,22 +134,9 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
 
     public void openMap(View v){
-
-        setContentView(R.layout.map_view);
-        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
-                .getMap();
-        Marker bikePosition = map.addMarker(new MarkerOptions()
-                .position(BikePosition)
-                .title("Your bike")
-                .snippet("Nice bike")
-                .icon(BitmapDescriptorFactory
-                        .fromResource(R.drawable.maplogo)));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(BikePosition, 15));
-        map.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
-
-//
-
-
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("BikePosition", BikePosition);
+        startActivity(intent);
     }
 
 
