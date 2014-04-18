@@ -89,6 +89,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
                 String v =  intent.getStringExtra("Activity");
                 actTextField.setText(v);
                 playSound(v);
+                Log.i(TAG,v);
             }
         };
 
