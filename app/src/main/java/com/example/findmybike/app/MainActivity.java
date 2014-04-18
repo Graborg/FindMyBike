@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -87,6 +88,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
             public void onReceive(Context context, Intent intent) {
                 String v =  intent.getStringExtra("Activity");
                 actTextField.setText(v);
+                playSound(v);
             }
         };
 
@@ -101,6 +103,19 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         lon.setText(Float.toString(longitude));
 
         Log.v(TAG, "Appen har startats");
+    }
+
+    private void playSound(String activityString) {
+        MediaPlayer player = null;
+        if(activityString.equals("Cykel")){
+            player=MediaPlayer.create(MainActivity.this,R.raw.bikebell);
+        }
+        if(activityString.equals("Till fots")){
+            player=MediaPlayer.create(MainActivity.this,R.raw.walking);
+        }
+        if(player != null) {
+            player.start();
+        }
     }
 
     @Override
