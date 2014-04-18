@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
     Button b1;
     Button b2;
 
-    TextView activity;
+    TextView actTextField;
 
     Float latitude;
     Float longitude;
@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         this.latitude = prefs.getFloat("latitude",0);
         this.longitude = prefs.getFloat("longitude",0);
         BikePosition = new LatLng(latitude,longitude);
-
+        actTextField = (TextView)findViewById(R.id.activity_text_field);
         b1 = (Button)findViewById(R.id.b1);
         b2 = (Button)findViewById(R.id.b2);
 
@@ -86,7 +86,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
             @Override
             public void onReceive(Context context, Intent intent) {
                 String v =  intent.getStringExtra("Activity");
-                activity.setText(v);
+                actTextField.setText(v);
             }
         };
 
@@ -95,9 +95,6 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         registerReceiver(receiver, filter);
 
 
-
-
-        activity = (TextView)findViewById(R.id.activity);
         lat = (TextView)findViewById(R.id.latitude);
         lon = (TextView)findViewById(R.id.longitude);
         lat.setText(Float.toString(latitude));
@@ -171,9 +168,8 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         editor.putFloat("longitude",longitude);
         editor.commit();
     }
-
-    protected void actResponse(String act){
-        activity.setText(act);
+    //When is this used?
+    protected void actResponse(String act) {
+        actTextField.setText(act);
     }
-
 }

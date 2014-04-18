@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current activity"
-        android:id="@+id/activity"
+        android:id="@+id/activity_text_field"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
