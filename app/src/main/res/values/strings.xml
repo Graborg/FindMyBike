@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="button">ImageButton</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="arrow">positionarrow</string>
+    <string name="title_activity_directions" />
 
 </resources>

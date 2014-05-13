@@ -52,6 +52,11 @@ public class MapActivity extends Activity {
 
     }
 
+    public void openDir(View v){
+        Intent intent = new Intent(this, DirectionActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }

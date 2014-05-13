@@ -1,10 +1,14 @@
 package com.example.findmybike.app;
 
 
+import android.app.ActionBar;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -61,6 +65,11 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         final ActivityHandler activityHandler = new ActivityHandler();
         player = null;
         actTextField = (TextView)findViewById(R.id.activity_text_field);
+
+        ActionBar bar = getActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.rgb(224,52,30)));
+
+
         b1 = (Button)findViewById(R.id.b1);
         b2 = (Button)findViewById(R.id.b2);
         Intent i = new Intent(this, MainActivity.class);
