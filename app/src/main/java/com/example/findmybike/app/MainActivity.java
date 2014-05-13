@@ -32,26 +32,23 @@ import android.content.BroadcastReceiver;
 
 
 public class MainActivity extends ActionBarActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
-
+    private static Context context;
     Boolean click = false;
 
-    TextView lat;
-    TextView lon;
 
     Button b1;
     Button b2;
 
     TextView actTextField;
 
-    Float latitude;
-    Float longitude;
-
+    TextView textLat;
+    TextView textLon;
     private ActivityRecognitionClient actClient;
     private BroadcastReceiver receiver;
-
-
+    private static LocationHelper myLocationHelper;
+    private MediaPlayer player;
     private static final String TAG = "Main";
-    private static LatLng BikePosition;
+
 
 
     @Override
@@ -59,23 +56,22 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SharedPreferences prefs = this.getSharedPreferences("BikePosition",0);
-        this.latitude = prefs.getFloat("latitude",0);
-        this.longitude = prefs.getFloat("longitude",0);
-        BikePosition = new LatLng(latitude,longitude);
+        MainActivity.context = getApplicationContext();
+        myLocationHelper = new LocationHelper(context, this);
+        final ActivityHandler activityHandler = new ActivityHandler();
+        player = null;
         actTextField = (TextView)findViewById(R.id.activity_text_field);
         b1 = (Button)findViewById(R.id.b1);
         b2 = (Button)findViewById(R.id.b2);
+        Intent i = new Intent(this, MainActivity.class);
 
-        if(latitude ==0 && longitude==0){
-            b2.setBackgroundResource(R.drawable.buttonnotclickableleft);
-            b2.setEnabled(false);
-        }else{
+        if(myLocationHelper.gotLocation()){
             b2.setBackgroundResource(R.drawable.buttonleft);
             b2.setEnabled(true);
+        }else{
+            b2.setBackgroundResource(R.drawable.buttonnotclickableleft);
+            b2.setEnabled(false);
         }
-
-
 
         int resp =GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if(resp == ConnectionResult.SUCCESS){
@@ -88,35 +84,20 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
             public void onReceive(Context context, Intent intent) {
                 String v =  intent.getStringExtra("Activity");
                 actTextField.setText(v);
-                playSound(v);
+                activityHandler.handle(MainActivity.this, v);
                 Log.i(TAG,v);
             }
         };
-
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
         registerReceiver(receiver, filter);
 
-
-        lat = (TextView)findViewById(R.id.latitude);
-        lon = (TextView)findViewById(R.id.longitude);
-        lat.setText(Float.toString(latitude));
-        lon.setText(Float.toString(longitude));
+        textLat = (TextView)findViewById(R.id.latitude);
+        textLon = (TextView)findViewById(R.id.longitude);
+        textLat.setText(Float.toString(myLocationHelper.getLong()));
+        textLon.setText(Float.toString(myLocationHelper.getLat()));
 
         Log.v(TAG, "Appen har startats");
-    }
-
-    private void playSound(String activityString) {
-        MediaPlayer player = null;
-        if(activityString.equals("Cykel")){
-            player=MediaPlayer.create(MainActivity.this,R.raw.bikebell);
-        }
-        if(activityString.equals("Till fots")){
-            player=MediaPlayer.create(MainActivity.this,R.raw.walking);
-        }
-        if(player != null) {
-            player.start();
-        }
     }
 
     @Override
@@ -124,7 +105,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         Intent intent = new Intent(this, MyIntentService.class);
         PendingIntent callbackIntent = PendingIntent.getService(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        actClient.requestActivityUpdates(10000, callbackIntent);
+        actClient.requestActivityUpdates (1000, callbackIntent);
         Log.v(TAG, "Connected");
     }
 
@@ -139,16 +120,23 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
     }
 
     public void savePosition(View v){
-
-       LocationHelper myLocationHelper = new LocationHelper(this, this);
-
+       myLocationHelper.startListener();
     }
 
+    public void updatePosition(){
 
+        textLat.setText(Float.toString(myLocationHelper.getLat()));
+        textLon.setText(Float.toString(myLocationHelper.getLong()));
+        b2.setBackgroundResource(R.drawable.buttonleft);
+        b2.setEnabled(true);
+
+        player = MediaPlayer.create(context, R.raw.bikebell);
+        if (player != null) player.start();
+    }
 
     public void openMap(View v){
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("BikePosition", BikePosition);
+        intent.putExtra("BikePosition", LocationHelper.BikePosition);
         startActivity(intent);
     }
 
@@ -165,25 +153,6 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         return super.onOptionsItemSelected(item);
     }
 
-    protected void gpsResponse(float latitude,float longitude){
-        this.latitude = latitude;
-        this.longitude = longitude;
-
-        Log.v(TAG, "GPS RESPONSE");
-        Log.v(TAG, Float.toString(latitude));
-        Log.v(TAG, Float.toString(longitude));
-        lat.setText(Float.toString(latitude));
-        lon.setText(Float.toString(longitude));
-        BikePosition = new LatLng(latitude,longitude);
-
-        b2.setBackgroundResource(R.drawable.buttonleft);
-        b2.setEnabled(true);
-        SharedPreferences prefs = this.getSharedPreferences("BikePosition",0);
-        SharedPreferences.Editor editor= prefs.edit();
-        editor.putFloat("latitude",latitude);
-        editor.putFloat("longitude",longitude);
-        editor.commit();
-    }
     //When is this used?
     protected void actResponse(String act) {
         actTextField.setText(act);

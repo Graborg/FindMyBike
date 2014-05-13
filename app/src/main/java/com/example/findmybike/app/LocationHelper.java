@@ -1,11 +1,15 @@
 package com.example.findmybike.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
+
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * * Location Helper Class.
@@ -15,9 +19,9 @@ import android.util.Log;
  */
 public class LocationHelper {
 
-    //Mainactivity
-    private MainActivity main;
 
+    private MainActivity main;
+    private SharedPreferences prefs;
     private static final String TAG = "LocationHelper";
 
     //variables to store lat and long
@@ -28,7 +32,7 @@ public class LocationHelper {
     //my location manager and listener
     private LocationManager    locationManager;
     private MyLocationListener locationListener;
-
+    public static LatLng BikePosition;
     /**
      * Constructor.
      *
@@ -38,18 +42,26 @@ public class LocationHelper {
 
         Log.v(TAG, "SETTING UP LISTENER");
 
-
         //setup the location manager
         locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
         //create the location listener
         locationListener = new MyLocationListener();
+        this.main = main;
+        prefs = context.getSharedPreferences("BikePosition", 0);
+        latitude = prefs.getFloat("latitude",0);
+        longitude = prefs.getFloat("longitude",0);
+        BikePosition = new LatLng(latitude, longitude);
+    }
 
+    public void startListener(){
         //setup a callback for when the GRPS/WiFi gets a lock and we receive data
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         //setup a callback for when the GPS gets a lock and we receive data
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+    }
 
-        this.main = main;
+    public boolean gotLocation() {
+        return (latitude != 0 && longitude != 0);
     }
 
     /***
@@ -64,6 +76,8 @@ public class LocationHelper {
         public void onLocationChanged(Location location) {
 
             Log.v(TAG, "LOCATION CHANGE");
+            Log.v(TAG, Float.toString(latitude));
+            Log.v(TAG, Float.toString(longitude));
 
             //store lat and long
             latitude = (float) location.getLatitude();
@@ -72,9 +86,12 @@ public class LocationHelper {
             //now we have our location we can stop the service from sending updates
             //comment out this line if you want the service to continue updating the users location
             locationManager.removeUpdates(locationListener);
-
-
-            main.gpsResponse(latitude,longitude);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putFloat("latitude", latitude).apply();
+            editor.putFloat("longitude", longitude).apply();
+            editor.commit();
+            BikePosition = new LatLng(latitude, longitude);
+            main.updatePosition();
 
         }
 
