@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="#0099cc"
     android:theme="@style/NoActionBar"
-    tools:context="com.example.findmybike.app.MapActivity">
+    tools:context="com.example.findmybike.app.MapActivity"
+    android:longClickable="true">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
@@ -12,5 +13,23 @@
         android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.MapFragment"/>
 
+
+    <Button
+        android:id="@+id/directions"
+
+        android:textColor="#FFFFFF"
+        android:text="Directions"
+        android:textSize="30dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        style="@style/btnDirectionStyleOrange"
+        android:layout_above="@+id/b1"
+        android:layout_alignLeft="@+id/b1"
+        android:layout_alignStart="@+id/b1"
+        android:layout_marginBottom="91dp"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="openDir"/>
 
 </FrameLayout>

@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@android:color/transparent"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name="com.example.findmybike.app.MainActivity"
-            android:label="@string/app_name"
+            android:label="BikeFinder"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MENU" />
@@ -46,6 +46,12 @@
             android:name="com.example.findmybike.app.MapActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_map"
+            android:theme="@style/NoActionBar" >
+        </activity>
+
+        <activity
+            android:name="com.example.findmybike.app.DirectionActivity"
+            android:label="@string/title_activity_directions"
             android:theme="@style/NoActionBar" >
         </activity>
     </application>
