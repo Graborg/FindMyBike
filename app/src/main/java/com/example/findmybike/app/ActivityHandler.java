@@ -12,31 +12,32 @@ import java.util.ArrayList;
  */
 public class ActivityHandler {
     private static final Integer BIKE_RECOG_MIN = 3;
+    private static final Integer Walking_RECOG_MIN = 2;
     public static Integer nbrOfRecognizedBikeAct;
+    public static Integer nbrOfRecognizedWalkingAct;
     private MediaPlayer player = null;
     public ActivityHandler(){
         MediaPlayer player = new MediaPlayer();
         nbrOfRecognizedBikeAct = 0;
+        nbrOfRecognizedWalkingAct = 0;
     }
     public void handle(MainActivity main, String recognizedAct) {
-        switch (recognizedAct) {
-            case "Cykel":
-                nbrOfRecognizedBikeAct++;
-                break;
-            case "Till fots":
-                if (nbrOfRecognizedBikeAct >= BIKE_RECOG_MIN) {
-                    main.savePosition((Button)main.findViewById(R.id.b1));
-                    resetBike();
-                }
-                break;
-            default:
-                break;
+        if (recognizedAct.equals("Cykel")) {
+            nbrOfRecognizedBikeAct++;
+        }
+        if(recognizedAct.equals("Till fots") ){
+            nbrOfRecognizedWalkingAct++;
+            if( nbrOfRecognizedBikeAct >= BIKE_RECOG_MIN && nbrOfRecognizedWalkingAct >= Walking_RECOG_MIN) {
+                 main.savePosition((Button) main.findViewById(R.id.b1));
+                 resetBike();
+             }
         }
     }
 
 
     private void resetBike(){
         nbrOfRecognizedBikeAct = 0;
+        nbrOfRecognizedWalkingAct = 0;
     }
 
 }
