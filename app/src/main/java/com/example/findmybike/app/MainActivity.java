@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         actTextField = (TextView)findViewById(R.id.activity_text_field);
 
         ActionBar bar = getActionBar();
-        bar.setBackgroundDrawable(new ColorDrawable(Color.rgb(224,52,30)));
+        bar.setBackgroundDrawable(new ColorDrawable(Color.rgb(224,52,30))); // changes the color of the actionbar
 
 
         b1 = (Button)findViewById(R.id.b1);
