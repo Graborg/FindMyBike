@@ -4,6 +4,14 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
 
+    <ImageView
+    android:id="@+id/compass"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/degrees"
+    android:layout_centerHorizontal="true"
+    android:src="@drawable/compass" />
+
     <TextView
     android:id="@+id/degrees"
     android:layout_width="wrap_content"
@@ -13,13 +21,5 @@
     android:layout_marginTop="20dp"
     android:text=" 0.0" />
 
-
-    <ImageView
-    android:id="@+id/compass"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/degrees"
-    android:layout_centerHorizontal="true"
-    android:src="@drawable/compass" />
 
 </RelativeLayout>

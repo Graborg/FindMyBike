@@ -95,4 +95,23 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG"
+        android:id="@+id/b3"
+        android:layout_below="@+id/activity_text_field"
+        android:layout_toRightOf="@+id/latitude"
+        android:layout_alignRight="@+id/b2"
+        android:layout_alignEnd="@+id/b2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG"
+        android:id="@+id/log"
+        android:layout_alignBottom="@+id/b3"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
