@@ -48,12 +48,13 @@
             android:label="@string/title_activity_map"
             android:theme="@style/NoActionBar" >
         </activity>
-
         <activity
-            android:name="com.example.findmybike.app.DirectionActivity"
-            android:label="@string/title_activity_directions"
+            android:name="com.example.findmybike.app.CompassActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_map"
             android:theme="@style/NoActionBar" >
         </activity>
+
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

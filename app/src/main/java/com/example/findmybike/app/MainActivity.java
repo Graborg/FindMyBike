@@ -82,6 +82,9 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
             b2.setEnabled(false);
         }
 
+
+
+
         int resp =GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if(resp == ConnectionResult.SUCCESS){
             actClient = new ActivityRecognitionClient(this, this, this);

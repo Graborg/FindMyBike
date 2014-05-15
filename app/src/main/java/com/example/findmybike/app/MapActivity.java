@@ -49,11 +49,10 @@ public class MapActivity extends Activity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-
     }
 
     public void openDir(View v){
-        Intent intent = new Intent(this, DirectionActivity.class);
+        Intent intent = new Intent(this, CompassActivity.class);
         startActivity(intent);
     }
 
