@@ -51,10 +51,6 @@ public class MainActivity extends AbstractReceiverActivity {
             b2.setEnabled(false);
         }
 
-<<<<<<< HEAD
-
-
-
         int resp =GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if(resp == ConnectionResult.SUCCESS){
             actClient = new ActivityRecognitionClient(this, this, this);
@@ -74,8 +70,6 @@ public class MainActivity extends AbstractReceiverActivity {
         filter.addAction("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
         registerReceiver(receiver, filter);
 
-=======
->>>>>>> 7369ea6da41b14afe83d16fcfe9d2e7a900b343a
         textLat = (TextView)findViewById(R.id.latitude);
         textLon = (TextView)findViewById(R.id.longitude);
         textLat.setText(Float.toString(myLocationHelper.getLong()));
