@@ -58,6 +58,7 @@
             android:name="com.example.findmybike.app.LogActivity"
             android:label="@string/title_activity_log" >
         </activity>
+
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

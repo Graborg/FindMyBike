@@ -51,24 +51,6 @@ public class MainActivity extends AbstractReceiverActivity {
             b2.setEnabled(false);
         }
 
-        int resp =GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if(resp == ConnectionResult.SUCCESS){
-            actClient = new ActivityRecognitionClient(this, this, this);
-            actClient.connect();
-            Log.v(TAG,"actClient started");
-        }
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String v =  intent.getStringExtra("Activity");
-                actTextField.setText(v);
-                activityHandler.handle(MainActivity.this, v);
-                Log.i(TAG,v);
-            }
-        };
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.kpbird.myactivityrecognition.ACTIVITY_RECOGNITION_DATA");
-        registerReceiver(receiver, filter);
 
         textLat = (TextView)findViewById(R.id.latitude);
         textLon = (TextView)findViewById(R.id.longitude);
@@ -88,10 +70,7 @@ public class MainActivity extends AbstractReceiverActivity {
         intent.putExtra("BikePosition", LocationHelper.BikePosition);
         startActivity(intent);
     }
-    @Override
-    protected void onDestroy() {
-        actClient.disconnect();
-    }
+    
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
