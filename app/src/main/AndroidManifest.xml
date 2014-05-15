@@ -54,7 +54,14 @@
             android:label="@string/title_activity_map"
             android:theme="@style/NoActionBar" >
         </activity>
+<<<<<<< HEAD
 
+=======
+        <activity
+            android:name="com.example.findmybike.app.LogActivity"
+            android:label="@string/title_activity_log" >
+        </activity>
+>>>>>>> 7369ea6da41b14afe83d16fcfe9d2e7a900b343a
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

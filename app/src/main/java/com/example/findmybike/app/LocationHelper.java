@@ -91,7 +91,6 @@ public class LocationHelper {
             editor.putFloat("longitude", longitude).apply();
             editor.commit();
             BikePosition = new LatLng(latitude, longitude);
-            main.updatePosition();
 
         }
 
@@ -115,7 +114,7 @@ public class LocationHelper {
      * Should check gotLocation() first.
      * @return - The current Latitude.
      */
-    public float getLat(){
+    public Float getLat(){
         return latitude;
     }
 
@@ -124,7 +123,7 @@ public class LocationHelper {
      * Should check gotLocation() first.
      * @return - The current Longitude.
      */
-    public float getLong(){
+    public Float getLong(){
         return longitude;
     }
 

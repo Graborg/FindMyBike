@@ -7,6 +7,7 @@
     <string name="button">ImageButton</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="arrow">positionarrow</string>
-    <string name="title_activity_directions" />
+    <string name="title_activity_directions"></string>
+    <string name="title_activity_log">LogActivity</string>
 
 </resources>
