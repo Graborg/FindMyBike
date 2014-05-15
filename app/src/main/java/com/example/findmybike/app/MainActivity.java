@@ -148,7 +148,10 @@ public class MainActivity extends ActionBarActivity implements GooglePlayService
         intent.putExtra("BikePosition", LocationHelper.BikePosition);
         startActivity(intent);
     }
-
+    @Override
+    protected void onDestroy() {
+        actClient.disconnect();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
