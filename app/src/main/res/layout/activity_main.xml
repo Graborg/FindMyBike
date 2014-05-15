@@ -104,7 +104,8 @@
         android:layout_below="@+id/activity_text_field"
         android:layout_toRightOf="@+id/latitude"
         android:layout_alignRight="@+id/b2"
-        android:layout_alignEnd="@+id/b2" />
+        android:layout_alignEnd="@+id/b2"
+        android:onClick="log"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -38,7 +38,6 @@ public class MapActivity extends Activity {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(BikePosition, 15));
         map.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
         map.setMyLocationEnabled(true);
-
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
