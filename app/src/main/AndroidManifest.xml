@@ -48,11 +48,14 @@
             android:label="@string/title_activity_map"
             android:theme="@style/NoActionBar" >
         </activity>
-
         <activity
             android:name="com.example.findmybike.app.DirectionActivity"
             android:label="@string/title_activity_directions"
             android:theme="@style/NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.example.findmybike.app.LogActivity"
+            android:label="@string/title_activity_log" >
         </activity>
     </application>
 
