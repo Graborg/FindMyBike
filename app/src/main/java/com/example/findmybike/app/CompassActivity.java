@@ -156,7 +156,7 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
 
         }
 
-        if(location.distanceTo(bikeLocation) <= 1){
+        if(location.distanceTo(bikeLocation) <= 2){
             Intent intent = new Intent(this,FoundBikeActivity.class);
             startActivity(intent);
         }
