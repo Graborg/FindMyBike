@@ -157,8 +157,9 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
 
         }
 
-        if(location.distanceTo(bikeLocation) <= 2){
-           System.out.println("Du har hittat din cykel!");
+        if(location.distanceTo(bikeLocation) <= 1){
+            Intent intent = new Intent(this,FoundBikeActivity.class);
+            startActivity(intent);
         }
 
 
