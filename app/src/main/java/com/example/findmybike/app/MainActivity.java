@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends AbstractReceiverActivity {
@@ -54,14 +56,14 @@ public class MainActivity extends AbstractReceiverActivity {
 
         textLat = (TextView)findViewById(R.id.latitude);
         textLon = (TextView)findViewById(R.id.longitude);
-        textLat.setText(Float.toString(myLocationHelper.getLong()));
-        textLon.setText(Float.toString(myLocationHelper.getLat()));
-
+        textLat.setText(myLocationHelper.getLat().toString());
+        textLon.setText(myLocationHelper.getLong().toString());
         Log.v(TAG, "Appen har startats");
     }
 
-    public void savePosition(View v){
+    public void parkButton(View v){
        myLocationHelper.startListener();
+       savePosition(myLocationHelper.getLat(), myLocationHelper.getLong());
     }
 
 
@@ -99,6 +101,13 @@ public class MainActivity extends AbstractReceiverActivity {
         activityHandler.register(this);
         textLat.setText(myLocationHelper.getLat().toString());
         textLon.setText(myLocationHelper.getLong().toString());
+        if(myLocationHelper.gotLocation()){
+            b2.setBackgroundResource(R.drawable.buttonleft);
+            b2.setEnabled(true);
+        }else{
+            b2.setBackgroundResource(R.drawable.buttonnotclickableleft);
+            b2.setEnabled(false);
+        }
     }
 
     @Override
@@ -107,5 +116,7 @@ public class MainActivity extends AbstractReceiverActivity {
         b2.setEnabled(true);
         textLat.setText(lat.toString());
         textLon.setText(lon.toString());
+        MediaPlayer player = MediaPlayer.create(context, R.raw.bikebell);
+        player.start();
     }
 }

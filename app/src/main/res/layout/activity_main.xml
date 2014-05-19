@@ -20,7 +20,7 @@
 
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:onClick="savePosition"
+        android:onClick="parkButton"
         android:layout_marginBottom="91dp"
         style="@style/btnStyleOrange"
         android:layout_above="@+id/latitude"

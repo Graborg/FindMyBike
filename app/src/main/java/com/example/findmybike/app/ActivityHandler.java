@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -85,12 +86,15 @@ public class ActivityHandler implements Serializable, GooglePlayServicesClient.C
         }
     }
 
+    private void handleParkButton(View v){
+        savePosition();
+    }
     private void resetBike(){
         nbrOfRecognizedBikeAct = 0;
         nbrOfRecognizedWalkingAct = 0;
     }
 
-    private void savePosition(){
+    public void savePosition(){
         locationHelper.startListener();
         currAct.savePosition(locationHelper.getLat(), locationHelper.getLong());;
         Context context = currAct.getApplicationContext();
