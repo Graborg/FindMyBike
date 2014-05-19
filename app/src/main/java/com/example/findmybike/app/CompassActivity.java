@@ -61,8 +61,7 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         myLocation = new Location("My location");
 
 
-        bikeLocation.setLatitude(LocationHelper.BikePosition.latitude);
-        bikeLocation.setLongitude(LocationHelper.BikePosition.longitude);  // Cykelns pos på kartan
+          // Cykelns pos på kartan
 
         compass = null;
         accelerometer = null;
@@ -142,8 +141,8 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         myLocation = location;
 
         if(!hasLocation) {
-            bikeLocation.setLatitude(lat + 0.0002);
-            bikeLocation.setLongitude(lon + 0.0002);
+            bikeLocation.setLatitude(LocationHelper.BikePosition.latitude);
+            bikeLocation.setLongitude(LocationHelper.BikePosition.longitude);
             hasLocation = true;
         }
 
