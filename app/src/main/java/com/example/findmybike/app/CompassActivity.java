@@ -17,6 +17,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 public class CompassActivity extends Activity implements LocationListener, GpsStatus.Listener, SensorEventListener {
     static final float ALPHA = 0.15f;
     Vibrator vibrate;
+    private static final String TAG = "CompassActivity";
 
 
     private TextView yourPos, bikePos, distance;
@@ -57,9 +59,10 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
 
         arrow = (ImageView) findViewById(R.id.compass);
 
-        myLocation.setLongitude(map.getMyLocation().getLongitude());       //Vår position på kartan
-        myLocation.setLatitude(map.getMyLocation().getLatitude());
+        bikeLocation = new Location("Bike location");
+        myLocation = new Location("My location");
 
+        Log.v(TAG, "Latitude for the bike: "+LocationHelper.BikePosition.latitude);
         bikeLocation.setLatitude(LocationHelper.BikePosition.latitude);
         bikeLocation.setLongitude(LocationHelper.BikePosition.longitude);  // Cykelns pos på kartan
 
@@ -72,7 +75,7 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         hasLocation = false;
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-       // vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
