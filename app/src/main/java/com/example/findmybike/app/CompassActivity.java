@@ -30,7 +30,7 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
     private static final String TAG = "CompassActivity";
 
 
-    private TextView yourPos, bikePos, distance;
+    private TextView distance;
     private ImageView arrow;
     private LocationManager locationManager;
     private SensorManager sensorManager;
@@ -53,16 +53,14 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         setContentView(R.layout.activity_directions);
         Intent i = getIntent();
 
-        //yourPos = (TextView) findViewById(R.id.pos);
-        //friendPos = (TextView) findViewById(R.id.friendPos);
-        //distance = (TextView) findViewById(R.id.distance);
 
+        distance = (TextView) findViewById(R.id.distance);
         arrow = (ImageView) findViewById(R.id.compass);
 
         bikeLocation = new Location("Bike location");
         myLocation = new Location("My location");
 
-        Log.v(TAG, "Latitude for the bike: "+LocationHelper.BikePosition.latitude);
+
         bikeLocation.setLatitude(LocationHelper.BikePosition.latitude);
         bikeLocation.setLongitude(LocationHelper.BikePosition.longitude);  // Cykelns pos på kartan
 
@@ -152,13 +150,11 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         if (location != null) {
 
             /**Printa positionen**/
-           // yourPos.setText("Lat: " + lat + " Lon: " + lon + " Acc: " + accuracy);
-            //friendPos.setText("Lat: " + bikeLocation.getLatitude() + " Lon: " + bikeLocation.getLongitude());
-            //distance.setText("Distance: " + location.distanceTo(bikeLocation));
+                distance.setText("Distance to bike: "+location.distanceTo(bikeLocation)+" m");
 
 
         } else {
-            yourPos.setText("hhh");
+
         }
 
         if(location.distanceTo(bikeLocation) <= 2){

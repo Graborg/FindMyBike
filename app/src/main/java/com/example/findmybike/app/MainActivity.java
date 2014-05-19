@@ -11,9 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 public class MainActivity extends AbstractReceiverActivity {
@@ -33,10 +34,14 @@ public class MainActivity extends AbstractReceiverActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ActionBar bar = getActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.rgb(224,52,30))); // changes the color of the actionbar
         MainActivity.context = getApplicationContext();
+
         TextView actTextField = (TextView)findViewById(R.id.activity_text_field);
+
+
 
         myLocationHelper = new LocationHelper(context, this);
         activityHandler = new ActivityHandler(myLocationHelper, actTextField, this);
