@@ -150,7 +150,7 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         if (location != null) {
 
             /**Printa positionen**/
-                distance.setText("Distance to bike: "+location.distanceTo(bikeLocation)+" m");
+                distance.setText("Distance to bike: "+myLocation.distanceTo(bikeLocation)+" m");
 
 
         } else {
