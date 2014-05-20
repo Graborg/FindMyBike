@@ -17,17 +17,13 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.GoogleMap;
-
 public class CompassActivity extends Activity implements LocationListener, GpsStatus.Listener, SensorEventListener {
     static final float ALPHA = 0.15f;
     Vibrator vibrate;
-    private static final String TAG = "CompassActivity";
 
 
     private TextView distance;
@@ -36,22 +32,20 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
     private SensorManager sensorManager;
     private Sensor compass,accelerometer;
     private String provider;
-    private Location myLocation, bikeLocation;
-    private GoogleMap map;
+    private Location myLocation,bikeLocation;
 
     private float[] valuesAccelerometer;
     private float[] valuesMagneticField;
     private float[] matrixR;
     private float[] matrixI;
     private float[] matrixValues;
-    private boolean hasLocation;
+
 
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directions);
-        Intent i = getIntent();
 
 
         distance = (TextView) findViewById(R.id.distance);
@@ -61,6 +55,8 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         myLocation = new Location("My location");
 
 
+        bikeLocation.setLatitude(LocationHelper.BikePosition.latitude);
+        bikeLocation.setLongitude(LocationHelper.BikePosition.longitude);
           // Cykelns pos på kartan
 
         compass = null;
@@ -134,29 +130,20 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
 
     @Override
     public void onLocationChanged(Location location) {
-        float lat = (float) location.getLatitude();
-        float lon = (float) location.getLongitude();
-        float accuracy = (float) location.getAccuracy();
 
         myLocation = location;
 
-        if(!hasLocation) {
-            bikeLocation.setLatitude(LocationHelper.BikePosition.latitude);
-            bikeLocation.setLongitude(LocationHelper.BikePosition.longitude);
-            hasLocation = true;
-        }
 
-        if (location != null) {
+
+
+
+        if (myLocation != null) {
 
             /**Printa positionen**/
                 distance.setText("Distance to bike: "+myLocation.distanceTo(bikeLocation)+" m");
 
 
-        } else {
-
-        }
-
-        if(location.distanceTo(bikeLocation) <= 2){
+        if(location.distanceTo(bikeLocation) <= 5){
             Intent intent = new Intent(this,FoundBikeActivity.class);
             startActivity(intent);
         }
