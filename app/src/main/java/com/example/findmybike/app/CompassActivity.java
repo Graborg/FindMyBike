@@ -39,6 +39,7 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
     private float[] matrixR;
     private float[] matrixI;
     private float[] matrixValues;
+    private boolean hasLocation;
 
 
 
@@ -140,8 +141,8 @@ public class CompassActivity extends Activity implements LocationListener, GpsSt
         if (myLocation != null) {
 
             /**Printa positionen**/
-                distance.setText("Distance to bike: "+myLocation.distanceTo(bikeLocation)+" m");
-
+            distance.setText("Distance to bike: " + myLocation.distanceTo(bikeLocation) + " m");
+        }
 
         if(location.distanceTo(bikeLocation) <= 5){
             Intent intent = new Intent(this,FoundBikeActivity.class);

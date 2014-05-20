@@ -2,7 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#ff78f1ff">
+    android:background="#fff0f4f2">
 
     <RelativeLayout
         android:layout_width="fill_parent"
